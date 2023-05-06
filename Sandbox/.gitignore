@@ -1,3 +1,12 @@
+# Ignoring content packs (can be downloaded individually)
+Content/StarterContent/**
+
+
+# Generated files we don't want to track
+.ignore
+Sandbox.code-workspace
+
+
 # Unreal Engine prebuilt ignore
 ## Visual Studio 2015 user specific files
 .vs/
@@ -38,9 +47,8 @@
 SourceArt/**/*.png
 SourceArt/**/*.tga
 ## Binary Files
-Binaries/*
-Plugins/*/Binaries/*
-
+Binaries/**
+Plugins/**/Binaries/**
 ## Builds
 Build/*
 ## Whitelist PakBlacklist-<BuildConfiguration>.txt files
@@ -65,7 +73,7 @@ DerivedDataCache/*
 # **/Content/**
 **/DerivedDataCache/**
 **/Intermediate/**
-**/Platforms/**
+# **/Platforms/**
 **/Saved/**
 Plugins/**/Intermediate
 # Plugins/**/Content
