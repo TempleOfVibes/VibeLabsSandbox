@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "PrometheusPlugin",
+	"Description": "Prometheus V Gods default explerience",
+	"Category": "Game Features",
+	"CreatedBy": "TempleOfVibes",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"EnabledByDefault": true,
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "PrometheusPluginRuntime",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"ExplicitlyLoaded": true,
+	"BuiltInInitialFeatureState": "Registered"
+}
