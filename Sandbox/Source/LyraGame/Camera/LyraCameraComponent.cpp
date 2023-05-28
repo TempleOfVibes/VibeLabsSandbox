@@ -41,6 +41,15 @@ void ULyraCameraComponent::OnRegister()
 	}
 }
 
+FRotator ULyraCameraComponent::GetPivotRotationOffset() const
+{
+	const AActor* TargetActor = GetTargetActor();
+	check(TargetActor);
+
+	return TargetActor->GetActorRotation();
+
+}
+
 void ULyraCameraComponent::GetCameraView(float DeltaTime, FMinimalViewInfo& DesiredView)
 {
 	check(CameraModeStack);
@@ -62,6 +71,10 @@ void ULyraCameraComponent::GetCameraView(float DeltaTime, FMinimalViewInfo& Desi
 	// Apply any offset that was added to the field of view.
 	CameraModeView.FieldOfView += FieldOfViewOffset;
 	FieldOfViewOffset = 0.0f;
+	FRotator PivotRotationOffset = GetPivotRotationOffset();
+	float ViewPitchAfterOffset = CameraModeView.Rotation.Pitch + PivotRotationOffset.Pitch;
+	CameraModeView.Rotation.Pitch = ViewPitchAfterOffset;
+	// float ViewPitchMaxAfterOffset = ViewPitchMax + PivotRotationOffset.Pitch;
 
 	// Keep camera component in sync with the latest view.
 	SetWorldLocationAndRotation(CameraModeView.Location, CameraModeView.Rotation);

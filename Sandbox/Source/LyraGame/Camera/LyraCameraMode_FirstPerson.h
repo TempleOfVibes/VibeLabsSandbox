@@ -14,7 +14,7 @@ class UCurveVector;
 /**
  * ULyraCameraMode_FirstPerson
  *
- *	A basic third person camera mode.
+ *	A basic First Person camera mode.
  */
 UCLASS(Abstract, Blueprintable)
 class ULyraCameraMode_FirstPerson : public ULyraCameraMode
@@ -27,6 +27,7 @@ public:
 
 protected:
 	virtual FVector GetPivotLocation() const override;
+	virtual FRotator GetPivotRotationOffset() const;
 
 	virtual void UpdateView(float DeltaTime) override;
 
@@ -39,25 +40,25 @@ protected:
 protected:
 
 	// Curve that defines local-space offsets from the target using the view pitch to evaluate the curve.
-	UPROPERTY(EditDefaultsOnly, Category = "Third Person", Meta = (EditCondition = "!bUseRuntimeFloatCurves"))
+	UPROPERTY(EditDefaultsOnly, Category = "First Person", Meta = (EditCondition = "!bUseRuntimeFloatCurves"))
 	TObjectPtr<const UCurveVector> TargetOffsetCurve;
 
 	// UE-103986: Live editing of RuntimeFloatCurves during PIE does not work (unlike curve assets).
 	// Once that is resolved this will become the default and TargetOffsetCurve will be removed.
-	UPROPERTY(EditDefaultsOnly, Category = "Third Person")
+	UPROPERTY(EditDefaultsOnly, Category = "First Person")
 	bool bUseRuntimeFloatCurves;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Third Person", Meta = (EditCondition = "bUseRuntimeFloatCurves"))
+	UPROPERTY(EditDefaultsOnly, Category = "First Person", Meta = (EditCondition = "bUseRuntimeFloatCurves"))
 	FRuntimeFloatCurve TargetOffsetX;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Third Person", Meta = (EditCondition = "bUseRuntimeFloatCurves"))
+	UPROPERTY(EditDefaultsOnly, Category = "First Person", Meta = (EditCondition = "bUseRuntimeFloatCurves"))
 	FRuntimeFloatCurve TargetOffsetY;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Third Person", Meta = (EditCondition = "bUseRuntimeFloatCurves"))
+	UPROPERTY(EditDefaultsOnly, Category = "First Person", Meta = (EditCondition = "bUseRuntimeFloatCurves"))
 	FRuntimeFloatCurve TargetOffsetZ;
 
 	// Alters the speed that a crouch offset is blended in or out
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Third Person")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "First Person")
 	float CrouchOffsetBlendMultiplier = 5.0f;
 
 	// Penetration prevention

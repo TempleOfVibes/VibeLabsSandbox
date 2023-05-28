@@ -49,6 +49,15 @@ FVector ULyraCameraMode_FirstPerson::GetPivotLocation() const
 
 }
 
+FRotator ULyraCameraMode_FirstPerson::GetPivotRotationOffset() const
+{
+	const AActor* TargetActor = GetTargetActor();
+	check(TargetActor);
+
+	return TargetActor->GetActorRotation();
+
+}
+
 void ULyraCameraMode_FirstPerson::UpdateView(float DeltaTime)
 {
 	UpdateForTarget(DeltaTime);
@@ -56,8 +65,13 @@ void ULyraCameraMode_FirstPerson::UpdateView(float DeltaTime)
 
 	FVector PivotLocation = GetPivotLocation() + CurrentCrouchOffset;
 	FRotator PivotRotation = GetPivotRotation();
+	FRotator PivotRotationOffset = GetPivotRotationOffset();
+	// PivotRotation.Pitch += PivotRotationOffset.Pitch;
+	float ViewPitchMinAfterOffset = ViewPitchMin - PivotRotationOffset.Pitch;
+	float ViewPitchMaxAfterOffset = ViewPitchMax + PivotRotationOffset.Pitch;
 
-	PivotRotation.Pitch = FMath::ClampAngle(PivotRotation.Pitch, ViewPitchMin, ViewPitchMax);
+
+	// PivotRotation.Pitch = FMath::ClampAngle(PivotRotation.Pitch, ViewPitchMinAfterOffset, ViewPitchMaxAfterOffset);
 
 	View.Location = PivotLocation;
 	View.Rotation = PivotRotation;
